@@ -18,11 +18,13 @@ Bundler.require(*Rails.groups)
 
 module CooperApi
   class Application < Rails::Application
-    config.middleware.insert_before 0, Rack::Cors do
-      allow do
-        origins '*'
-        resource '*', headers: :any, methods: [:get, :post, :put, :delete]
-      end
-    end
+    Bundler.require(*Rails.groups)
+        config.middleware.insert_before 0, Rack::Cors do
+          allow do
+            origins '*'
+            resource '*', headers: :any, methods: [:get, :post, :put, :delete]
+          end
+        end
+    config.api_only = true
   end
 end
